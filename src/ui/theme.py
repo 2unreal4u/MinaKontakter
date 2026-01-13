@@ -5,6 +5,16 @@ Tema och stilkonfiguration för MinaKontakter.
 from config import THEME
 
 
+# Lösenordsstyrka-färger (0-4 skala)
+PASSWORD_STRENGTH_COLORS = {
+    0: "#fc8181",  # Röd - mycket svagt
+    1: "#f6ad55",  # Orange - svagt
+    2: "#faf089",  # Gul - ok
+    3: "#68d391",  # Ljusgrön - bra
+    4: "#48bb78",  # Grön - starkt
+}
+
+
 class Theme:
     """Tema-konstanter och hjälpmetoder för UI."""
     
