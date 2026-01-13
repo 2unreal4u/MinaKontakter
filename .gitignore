@@ -14,7 +14,6 @@ venv/
 # PyInstaller
 build/
 dist/
-*.spec
 
 # Database files (sensitive data)
 *.krdb
