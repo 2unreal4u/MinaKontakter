@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+.eggs/
+*.egg
+
+# PyInstaller
+build/
+dist/
+*.spec
+
+# Database files (sensitive data)
+*.krdb
+*.backup
+*.db
+
+# Log files
+*.log
+
+# Config files with user data
+*.conf
+minakontakter.conf
+kontaktregister.conf
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Test data
+test_data/
+example_data/
+*.csv
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# User documents (should not be in repo)
+PROJEKTSTATUS.md
+IMPROVEMENTS.md
