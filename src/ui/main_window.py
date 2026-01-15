@@ -576,6 +576,31 @@ class MainWindow(ctk.CTk):
     
     def _on_close(self):
         """Hanterar stängning av applikationen."""
+        # Stäng eventuella öppna menyer/overlays
+        if hasattr(self, '_active_file_menu') and self._active_file_menu:
+            try:
+                self._active_file_menu.destroy()
+            except:
+                pass
+        if hasattr(self, '_menu_overlay') and self._menu_overlay:
+            try:
+                self._menu_overlay.destroy()
+            except:
+                pass
+        
+        # Stäng menyer i contact_detail om den finns
+        if hasattr(self, 'detail_panel'):
+            if hasattr(self.detail_panel, '_active_menu') and self.detail_panel._active_menu:
+                try:
+                    self.detail_panel._active_menu.destroy()
+                except:
+                    pass
+            if hasattr(self.detail_panel, '_menu_overlay') and self.detail_panel._menu_overlay:
+                try:
+                    self.detail_panel._menu_overlay.destroy()
+                except:
+                    pass
+        
         # Skapa backup om aktiverat
         if self.db_manager.is_open:
             if self.db_manager.data and self.db_manager.data.metadata.auto_backup:
@@ -585,4 +610,6 @@ class MainWindow(ctk.CTk):
             # Stäng databas
             self.db_manager.close()
         
+        # Avsluta mainloop och förstör fönstret
+        self.quit()
         self.destroy()
