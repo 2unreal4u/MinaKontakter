@@ -69,7 +69,8 @@ class DatabaseManager:
         self,
         db_path: str,
         backup_path: str,
-        password: str
+        password: str,
+        language: str = "sv"
     ) -> Tuple[bool, str]:
         """
         Skapar en ny krypterad databas.
@@ -78,6 +79,7 @@ class DatabaseManager:
             db_path: Sökväg där databasen ska sparas
             backup_path: Sökväg för backups
             password: Användarens valda lösenord
+            language: Språkkod (sv/en)
             
         Returns:
             (success, error_message)

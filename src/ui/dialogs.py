@@ -276,20 +276,28 @@ class SetupDialog(ctk.CTkToplevel):
         ).pack(side="right")
     
     def _browse_db_path(self):
+        # Släpp grab tillfälligt så fil-dialogen fungerar
+        self.grab_release()
         path = filedialog.asksaveasfilename(
+            parent=self,
             title="Välj plats för databasen",
             defaultextension=".krdb",
             filetypes=[("KontaktRegister databas", "*.krdb")],
             initialfile="kontakter.krdb"
         )
+        self.grab_set()
         if path:
             self.db_path_entry.delete(0, "end")
             self.db_path_entry.insert(0, path)
     
     def _browse_backup_path(self):
+        # Släpp grab tillfälligt så fil-dialogen fungerar
+        self.grab_release()
         path = filedialog.askdirectory(
+            parent=self,
             title="Välj mapp för backups"
         )
+        self.grab_set()
         if path:
             self.backup_path_entry.delete(0, "end")
             self.backup_path_entry.insert(0, path)
@@ -361,20 +369,23 @@ class SetupDialog(ctk.CTkToplevel):
                 break
     
     def _create(self):
-        error = self._validate()
-        if error:
-            self.error_label.configure(text=error)
-            return
-        
-        self.result = (
-            self.db_path_entry.get().strip(),
-            self.backup_path_entry.get().strip(),
-            self.password_entry.get(),
-            self.selected_language
-        )
-        
-        self.on_complete(*self.result)
-        self.destroy()
+        try:
+            error = self._validate()
+            if error:
+                self.error_label.configure(text=error)
+                return
+            
+            self.result = (
+                self.db_path_entry.get().strip(),
+                self.backup_path_entry.get().strip(),
+                self.password_entry.get(),
+                self.selected_language
+            )
+            
+            self.on_complete(*self.result)
+            self.destroy()
+        except Exception as e:
+            self.error_label.configure(text=f"Fel: {str(e)}")
     
     def _cancel(self):
         self.result = None
